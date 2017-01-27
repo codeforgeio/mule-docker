@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>io.codeforge.mule.docker</groupId>
+	<artifactId>mule-docker</artifactId>
+	<packaging>docker-build</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.18.1</version>
+				<extensions>true</extensions>
+				<configuration>
+					<images>
+						<image>
+							<alias>mule-docker</alias>
+							<name>codeforgeio/mule-docker:latest</name>
+							<build>
+								<tags>
+									<tag>latest</tag>
+									<tag>${project.version}</tag>
+								</tags>
+								<dockerFileDir>.</dockerFileDir>
+							</build>
+						</image>
+					</images>
+					<authConfig>
+						<username>${dockerhub.username}</username>
+      					<password>${dockerhub.password}</password>
+					</authConfig>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<version>1.0</version>
+</project>
